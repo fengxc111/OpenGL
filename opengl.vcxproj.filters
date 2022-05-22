@@ -57,6 +57,9 @@
     <ClCompile Include="hellocoord.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="hellocamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\LoadShaders.h">
