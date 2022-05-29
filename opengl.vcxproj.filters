@@ -60,6 +60,12 @@
     <ClCompile Include="hellocamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="exercise1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="exercise2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\LoadShaders.h">
