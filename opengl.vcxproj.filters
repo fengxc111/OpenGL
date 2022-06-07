@@ -75,6 +75,9 @@
     <ClCompile Include="exercise5.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="hellocolors.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\LoadShaders.h">
