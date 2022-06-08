@@ -23,7 +23,7 @@ glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-glm::vec3 lightPos(1.2f, 1.0f, -1.0f);
+glm::vec3 lightPos(1.2f, 1.0f, 0.0f);
 
 bool firstMouse = true;
 float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
@@ -62,51 +62,51 @@ int main()
         return -1;
     }
 
-    Shader lightingShader("shaders/7.1.colors.vs", "shaders/7.1.colors.fs");
-    Shader lightCubeShader("shaders/light.vs", "shaders/light.fs");
+    Shader lightingShader("shaders/8.1.lighting.vs", "shaders/8.1.lighting.fs");
+    Shader lightCubeShader("shaders/8.1.light_cube.vs", "shaders/8.1.light_cube.fs");
 
     float vertices[] = {
-         -0.5f, -0.5f, -0.5f,
-          0.5f, -0.5f, -0.5f,
-          0.5f,  0.5f, -0.5f,
-          0.5f,  0.5f, -0.5f,
-         -0.5f,  0.5f, -0.5f,
-         -0.5f, -0.5f, -0.5f,
+     -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+      0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+      0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+      0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-         -0.5f, -0.5f,  0.5f,
-          0.5f, -0.5f,  0.5f,
-          0.5f,  0.5f,  0.5f,
-          0.5f,  0.5f,  0.5f,
-         -0.5f,  0.5f,  0.5f,
-         -0.5f, -0.5f,  0.5f,
+     -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+      0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+      0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+      0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-         -0.5f,  0.5f,  0.5f,
-         -0.5f,  0.5f, -0.5f,
-         -0.5f, -0.5f, -0.5f,
-         -0.5f, -0.5f, -0.5f,
-         -0.5f, -0.5f,  0.5f,
-         -0.5f,  0.5f,  0.5f,
+     -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+     -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+     -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+     -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+     -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+     -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-          0.5f,  0.5f,  0.5f,
-          0.5f,  0.5f, -0.5f,
-          0.5f, -0.5f, -0.5f,
-          0.5f, -0.5f, -0.5f,
-          0.5f, -0.5f,  0.5f,
-          0.5f,  0.5f,  0.5f,
+      0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+      0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+      0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+      0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+      0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+      0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-         -0.5f, -0.5f, -0.5f,
-          0.5f, -0.5f, -0.5f,
-          0.5f, -0.5f,  0.5f,
-          0.5f, -0.5f,  0.5f,
-         -0.5f, -0.5f,  0.5f,
-         -0.5f, -0.5f, -0.5f,
+     -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+      0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+      0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+      0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+     -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+     -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-         -0.5f,  0.5f, -0.5f,
-          0.5f,  0.5f, -0.5f,
-          0.5f,  0.5f,  0.5f,
-          0.5f,  0.5f,  0.5f,
-         -0.5f,  0.5f,  0.5f,
-         -0.5f,  0.5f, -0.5f,
+     -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+      0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+      0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+      0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+     -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+     -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
 
     unsigned int VBO, cubeVAO;
@@ -116,47 +116,59 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
 
     unsigned int lightCubeVAO;
     glGenVertexArrays(1, &lightCubeVAO);
     glBindVertexArray(lightCubeVAO);
     // we only need to bind to the VBO (to link it with glVertexAttribPointer), no need to fill it; the VBO's data already contains all we need (it's already bound, but we do it again for educational purposes)
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    //glViewport(0, 0, 800, 600);
-
-    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glEnable(GL_DEPTH_TEST);
     while (!glfwWindowShouldClose(window))
     {
+        // per-frame time logic
+               // --------------------
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
+        // input
+        // -----
         processInput(window);
+        lightPos.x = sin(glfwGetTime());
+        lightPos.y = cos(glfwGetTime());
 
+        // render
+        // ------
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // be sure to activate shader when setting uniforms/drawing objects
         lightingShader.use();
         lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
         lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+        lightingShader.setVec3("lightPos", lightPos);
+        lightingShader.setVec3("viewPos", camera.Position);
+
         // view/projection transformations
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		lightingShader.setMat4("projection", projection);
-		lightingShader.setMat4("view", view);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 view = camera.GetViewMatrix();
+        lightingShader.setMat4("projection", projection);
+        lightingShader.setMat4("view", view);
+
         // world transformation
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         lightingShader.setMat4("model", model);
+
         // render the cube
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
-
 
         // also draw the lamp object
         lightCubeShader.use();
@@ -170,6 +182,9 @@ int main()
         glBindVertexArray(lightCubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
+
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

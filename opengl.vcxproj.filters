@@ -78,6 +78,9 @@
     <ClCompile Include="hellocolors.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="hellolighting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\LoadShaders.h">
