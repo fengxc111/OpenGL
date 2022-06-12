@@ -87,6 +87,9 @@
     <ClCompile Include="hellomaterials.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="exercise10.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\LoadShaders.h">

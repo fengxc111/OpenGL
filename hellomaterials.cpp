@@ -149,9 +149,12 @@ int main()
 
         // light properties
         glm::vec3 lightColor;
-        lightColor.x = static_cast<float>(sin(glfwGetTime() * 2.0));
-        lightColor.y = static_cast<float>(sin(glfwGetTime() * 0.7));
-        lightColor.z = static_cast<float>(sin(glfwGetTime() * 1.3));
+        //lightColor.x = static_cast<float>(sin(glfwGetTime() * 2.0));
+        //lightColor.y = static_cast<float>(sin(glfwGetTime() * 0.7));
+        //lightColor.z = static_cast<float>(sin(glfwGetTime() * 1.3));
+        lightColor.x = 1.0f;
+        lightColor.y = 1.0f;
+        lightColor.z = 1.0f;
         glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f); // decrease the influence
         glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f); // low influence
         lightingShader.setVec3("light.ambient", ambientColor);
